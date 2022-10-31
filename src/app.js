@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const path = require('path')
 const registerRouter = require('./routers/register')
+const loginRouter = require('./routers/login')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -21,6 +22,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
 app.use(registerRouter)
+app.use(loginRouter)
 
 app.listen(process.env.PORT, () => {
     console.log('Server is up!~')
