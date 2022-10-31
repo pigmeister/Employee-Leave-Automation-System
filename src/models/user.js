@@ -19,30 +19,30 @@ const UserSchema = new mongoose.Schema({
             }
         }
     },
-    mobile : {
-        type : String,
+    mobile: {
+        type: String,
         required: true,
         trim: true
 
     },
-    department : {
-        type : String,
+    department: {
+        type: String,
         required: true,
         trim: true
 
     },
-    designation : {
-        type : String,
+    designation: {
+        type: String,
         required: true,
         trim: true
 
     },
-    isHead : {
-        type : Boolean,
+    isHead: {
+        type: Boolean,
         required: true
     },
     isOnLeave : {
-        type : Boolean,
+        type: Boolean,
         required: true
     },
     password: {
@@ -61,32 +61,32 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
     leavesLeft: {
-        cl:{
-            type : Number,
+        cl: {
+            type: Number,
             required: true,
             default:10
         },
-        el:{
-            type : Number,
+        el: {
+            type: Number,
             required: true,
             default:10
         },
-        rh:{
-            type : Number,
+        rh: {
+            type: Number,
             required: true,
             default:10
         },
-        hpl:{
-            type : Number,
+        hpl: {
+            type: Number,
             required: true,
             default:10
         },
-        scl:{
-            type : Number,
+        scl: {
+            type: Number,
             required: true,
             default:10
         },
-        compOff:{
+        compOff: {
             type : Number,
             required: true,
             default:10

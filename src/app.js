@@ -1,23 +1,15 @@
 require('./db/mongoose')
 const express = require("express")
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const registerRouter = require('./router/register')
-const PORT = process.env.PORT
 const mongoose = require('mongoose')
-
-mongoose.connect("mongodb+srv://nipuntopno:Nipun123@cluster0.ydchfxl.mongodb.net/?retryWrites=true&w=majority",{
-    useNewUrlParser:true,
-    // useFindAndModify:true,
-    useUnifiedTopology:true
-    // useCreateIndex:true
-})
+const cookieParser = require('cookie-parser')
+const path = require('path')
+const registerRouter = require('./routers/register')
 
 const app = express()
 app.set('view engine', 'ejs')
 
 //views folder
-app.set('views', path.join(__dirname,'../template/views'))
+app.set('views', path.join(__dirname, '../templates/views'))
 
 //public folder
 app.use(express.static(path.join(__dirname, '../public')))
@@ -30,6 +22,6 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use(registerRouter)
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('Server is up!~')
 })
