@@ -8,7 +8,7 @@ const unauth = async (req, res, next) => {
         return next()
 
     const token = req.cookies['auth_token']
-    const decode = jwt.verify(token, "8AeLEQtOxa")
+    const decode = jwt.verify(token, process.env.JWT_SECRET)
 
     const user = await User.findOne({_id: decode._id, 'tokens.token': token})
 
