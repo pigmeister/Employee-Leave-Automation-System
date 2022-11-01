@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const path = require('path')
 const registerRouter = require('./routers/register')
 const loginRouter = require('./routers/login')
+const logoutRouter = require('./routers/logout')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use(registerRouter)
 app.use(loginRouter)
+app.use(logoutRouter)
 
 app.listen(process.env.PORT, () => {
     console.log('Server is up!~')

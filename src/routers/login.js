@@ -9,13 +9,14 @@ router.get('/login', unauth, (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    try{
+    try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
 
         const token = await user.generateAuthToken()
         res.cookie('auth_token', token)
         res.redirect('/')
-    } catch (e) {
+    } 
+    catch (e) {
         res.redirect('/login?error=1')
     }
     

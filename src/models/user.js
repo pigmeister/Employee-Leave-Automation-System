@@ -37,10 +37,6 @@ const UserSchema = new mongoose.Schema({
         trim: true
 
     },
-    isHead: {
-        type: Boolean,
-        required: true
-    },
     isOnLeave : {
         type: Boolean,
         required: true
@@ -91,6 +87,17 @@ const UserSchema = new mongoose.Schema({
             required: true,
             default:10
         }
+    },
+    parents: [{
+        parent: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true
+        }
+    }],
+    position : {
+        type : String,
+        required : true,
+        default: "Student"
     },
     tokens: [{
         token: {
