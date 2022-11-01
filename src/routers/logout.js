@@ -1,7 +1,6 @@
 const express = require('express')
-const User = require('../models/user')
 const auth = require('../middlewares/auth')
-const jwt = require('jsonwebtoken')
+const adminAuth = require('../middlewares/adminAuth')
 
 const router = new express.Router()
 
@@ -9,6 +8,19 @@ router.get('/logout', auth, async (req, res) => {
     const user = req.user
     const token = req.token
     
+    try {
+        user.tokens = user.tokens.filter((t) => t.token!==token)
+        await user.save()
+    } catch (e) {
+        res.redirect('/user')
+    }
+
+    res.redirect('/')
+})
+
+router.get('/adminLogout', adminAuth, async (req, res) => {
+    const user = req.user
+    const token = req.token
     
     try {
         user.tokens = user.tokens.filter((t) => t.token!==token)
@@ -21,6 +33,19 @@ router.get('/logout', auth, async (req, res) => {
 })
 
 router.get('/logoutAll', auth, async (req, res) => {
+    const user = req.user
+    
+    try {
+        user.tokens = []
+        await user.save()
+    } catch (e) {
+        res.redirect('/user')
+    }
+
+    res.redirect('/')
+})
+
+router.get('/adminLogoutAll', adminAuth, async (req, res) => {
     const user = req.user
     
     try {

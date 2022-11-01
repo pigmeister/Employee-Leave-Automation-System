@@ -1,10 +1,10 @@
 const express = require('express')
 const User = require('../models/user.js')
-const unauth = require('../middlewares/unauth')
+const adminAuth = require('../middlewares/adminAuth')
 
 const router = new express.Router()
 
-router.get('/register', unauth, (req, res) => {
+router.get('/register', adminAuth, (req, res) => {
     res.render('register', {error: req.query.error, auth: req.query.auth})
 })
 
@@ -23,8 +23,7 @@ router.post('/register', async (req, res) => {
 
     try {
         const token = await user.generateAuthToken()
-        res.cookie('auth_token', token)
-        res.redirect('/user')
+        res.redirect('/register')
     }
     catch (e) {
         res.redirect('/register?error=1')
