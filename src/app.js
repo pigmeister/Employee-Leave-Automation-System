@@ -7,6 +7,7 @@ const registerRouter = require('./routers/register')
 const loginRouter = require('./routers/login')
 const adminLoginRouter = require('./routers/adminLogin')
 const logoutRouter = require('./routers/logout')
+const leaveFormRouter = require('./routers/leaveForm')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -27,6 +28,7 @@ app.use(registerRouter)
 app.use(loginRouter)
 app.use(adminLoginRouter)
 app.use(logoutRouter)
+app.use(leaveFormRouter)
 
 app.listen(process.env.PORT, () => {
     console.log('Server is up!~')

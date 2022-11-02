@@ -22,8 +22,12 @@ const UserSchema = new mongoose.Schema({
     mobile: {
         type: String,
         required: true,
-        trim: true
-
+        trim: true,
+        validate(x) {
+            if(!validator.isMobilePhone(x)) {
+                throw new Error("Mobile number is not valid!")
+            }
+        }
     },
     department: {
         type: String,

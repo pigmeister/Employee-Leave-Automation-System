@@ -7,7 +7,6 @@
     "start": "node src/app.js",
     "dev": "env-cmd -f ./dev.env nodemon src/app.js -e js,ejs,css",
     "play": "env-cmd -f ./dev.env node src/app.js"
-
   },
   "repository": {
     "type": "git",

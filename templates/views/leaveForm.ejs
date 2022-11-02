@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Form</title>
+</head>
+<body>
+
+    <form method="POST">
+        <div class="form-group mb-2">
+            <label for="regis-username">Name</label>
+            <input id="regis-username" type="text" name="username" class="form-control " value="<%=user.name%>" disabled/>
+        </div>
+        <div class="form-group mb-2">
+            <label>Email
+                <input type="email" name="email" class="form-control" value="<%=user.email%>" disabled/>
+            </label>
+        </div>
+        <div class="form-group mb-2">
+            <label>Mobile Number
+                <input type="number" name="number" class="form-control" value="<%=user.mobile%>" disabled>
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>Designation
+                <input type="text" name="designation" class="form-control" value="<%=user.designation%>" disabled>
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>Department
+                <input type="text" name="department" class="form-control" value="<%=user.department%>" disabled>
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>From
+                <input type="date" name="startTime" class="form-control" >
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>To
+                <input type="date" name="endTime" class="form-control" >
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>Leave Type
+               <select>
+                   <option name="CL">CL</option>
+                   <option name="RH">RH</option>
+                   <option name="HPL">HPL</option>
+                   <option name="EL">EL</option>
+                   <option name="SCL">SCL</option>
+                   <option name="Commuted">Commuted</option>
+                   <option name="Comp-off">Comp-off</option>
+               </select>
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>Reason
+                <input type="text" name="reason" class="form-control" >
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>Address During Leave
+                <input type="text" name="addressDuringLeave" class="form-control" >
+            </label>
+        </div>
+        <div class="form-group mb-3">
+            <label>I propose to avail myself of leave travel concession(LTC) in the block years during the ensuing leave
+                <input type="checkbox" name="LTC" class="form-control">
+            </label>
+        </div>
+        <input type="submit" value="Sign Up" class="btn btn-primary-site ">
+        </form>
+</body>
+</html>
