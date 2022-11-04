@@ -64,7 +64,7 @@ const UserSchema = new mongoose.Schema({
         cl: {
             type: Number,
             required: true,
-            default:10
+            default:8
         },
         el: {
             type: Number,
@@ -74,7 +74,7 @@ const UserSchema = new mongoose.Schema({
         rh: {
             type: Number,
             required: true,
-            default:10
+            default:2
         },
         hpl: {
             type: Number,
@@ -89,20 +89,11 @@ const UserSchema = new mongoose.Schema({
         compOff: {
             type : Number,
             required: true,
-            default:10
+            default:5
         }
     },
-    parents: [{
-        parent: {
-            type: mongoose.Schema.Types.ObjectId,
-            //required: true
-        }
-    }],
-    position : {
-        type : String,
-        required : true,
-        default: "Student"
-    },
+    parents: [mongoose.Schema.Types.ObjectId],
+    
     tokens: [{
         token: {
             type: String,

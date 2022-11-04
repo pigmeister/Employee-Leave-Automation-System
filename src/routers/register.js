@@ -12,13 +12,13 @@ router.post('/register', async (req, res) => {
     const user = new User({
         name: req.body.username,
         email: req.body.email,
-        mobile: "9876577333",
-        isHead: false,
+        mobile: req.body.mobile,
         isOnLeave: false,
         password: req.body.password,
         gender: req.body.gender,
         designation: req.body.designation,
-        department: req.body.department
+        department: req.body.department,
+        position: req.body.position
     })
 
     try {
