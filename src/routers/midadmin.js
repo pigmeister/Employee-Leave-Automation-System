@@ -1,25 +1,17 @@
 const express = require('express')
-const Admin = require('../models/midadmin')
-const unauth = require('../middlewares/unauth')
-
+const auth = require('../middlewares/midadminAuth')
+const Leave = require('../models/leave')
+const User = require('../models/user')
 const router = new express.Router()
+// const moment = require('moment')
 
-router.get('/midadminLogin', unauth, (req, res) => {
-    res.render('login')
+router.get('/midadmin', auth, (req, res) => {
+    res.render("home", {home: 3})
 })
 
-router.post('/midadminLogin', async (req, res) => {
-    try {
-        const user = await Admin.findByCredentials(req.body.email, req.body.password)
-
-        const token = await user.generateAuthToken()
-        res.cookie('auth_token', token)
-        res.redirect('/')
-    } 
-    catch (e) {
-        res.redirect('/login?error=1')
-    }
+router.get('/midadmin/leave', auth, async (req, res) => {
     
 })
 
 module.exports = router
+

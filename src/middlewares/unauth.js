@@ -1,6 +1,7 @@
 const cookieParser = require('cookie-parser')
 const User = require('../models/user')
 const Admin = require('../models/admin')
+const Midadmin = require('../models/midadmin')
 const jwt = require('jsonwebtoken')
 
 const unauth = async (req, res, next) => {
@@ -20,6 +21,12 @@ const unauth = async (req, res, next) => {
 
     if(admin) {
         return res.redirect('/admin')
+    }
+
+    const midadmin = await Midadmin.findOne({_id: decode._id, 'tokens.token': token})
+
+    if(midadmin) {
+        return res.redirect('/midadmin')
     }
 
     next()

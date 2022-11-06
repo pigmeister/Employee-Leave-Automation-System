@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser')
 const path = require('path')
 const registerRouter = require('./routers/register')
 const loginRouter = require('./routers/login')
+const midadminLoginRouter = require('./routers/midadminLogin')
+const midadminRouter = require('./routers/midadmin')
 const adminLoginRouter = require('./routers/adminLogin')
 const logoutRouter = require('./routers/logout')
 const leaveFormRouter = require('./routers/leaveForm')
@@ -29,6 +31,9 @@ app.use(loginRouter)
 app.use(adminLoginRouter)
 app.use(logoutRouter)
 app.use(leaveFormRouter)
+app.use(midadminLoginRouter)
+app.use(midadminRouter)
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is up!~')
