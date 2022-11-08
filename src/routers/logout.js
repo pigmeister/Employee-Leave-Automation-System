@@ -1,6 +1,7 @@
 const express = require('express')
 const auth = require('../middlewares/auth')
 const adminAuth = require('../middlewares/adminAuth')
+const midadminAuth = require('../middlewares/midadminAuth')
 
 const router = new express.Router()
 
@@ -50,6 +51,20 @@ router.get('/adminLogoutAll', adminAuth, async (req, res) => {
     
     try {
         user.tokens = []
+        await user.save()
+    } catch (e) {
+        res.redirect('/user')
+    }
+
+    res.redirect('/')
+})
+
+router.get('/midadminLogout', midadminAuth, async (req, res) => {
+    const user = req.user
+    const token = req.token
+    
+    try {
+        user.tokens = user.tokens.filter((t) => t.token!==token)
         await user.save()
     } catch (e) {
         res.redirect('/user')

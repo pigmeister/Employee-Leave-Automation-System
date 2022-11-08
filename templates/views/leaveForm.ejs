@@ -20,7 +20,7 @@
         </div>
         <div class="form-group mb-2">
             <label>Mobile Number
-                <input type="number" name="number" class="form-control" value="<%=user.mobile%>" disabled>
+                <input type="number" name="mobile" class="form-control" value="<%=user.mobile%>" disabled>
             </label>
         </div>
         <div class="form-group mb-3">
@@ -45,7 +45,7 @@
         </div>
         <div class="form-group mb-3">
             <label>Leave Type
-               <select>
+               <select name="leaveType">
                    <option name="CL">CL</option>
                    <option name="RH">RH</option>
                    <option name="HPL">HPL</option>
@@ -68,7 +68,7 @@
         </div>
         <div class="form-group mb-3">
             <label>Person taking charge of duties
-                <input type="text" name="replacement" class="form-control" >
+                <input type="email" name="replacement" class="form-control" >
             </label>
         </div>
         <div class="form-group mb-3">
@@ -76,7 +76,7 @@
                 <input type="checkbox" name="LTC" class="form-control">
             </label>
         </div>
-        <input type="submit" value="Sign Up" class="btn btn-primary-site ">
+        <input type="submit" value="Apply" class="btn btn-primary-site ">
         </form>
 </body>
 </html>

@@ -44,8 +44,8 @@ const leaveSchema = new mongoose.Schema({
         trim: true
     },
     replacement:{
-        type: mongoose.Schema.Types.ObjectId
-        //required:true
+        type: mongoose.Schema.Types.ObjectId,
+        required:true
     },
     addressDuringLeave:{
         type:String,
