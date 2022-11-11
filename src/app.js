@@ -10,6 +10,7 @@ const midadminRouter = require('./routers/midadmin')
 const adminLoginRouter = require('./routers/adminLogin')
 const logoutRouter = require('./routers/logout')
 const leaveFormRouter = require('./routers/leaveForm')
+const adminRouter = require('./routers/admin')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -33,6 +34,7 @@ app.use(logoutRouter)
 app.use(leaveFormRouter)
 app.use(midadminLoginRouter)
 app.use(midadminRouter)
+app.use(adminRouter)
 
 
 app.listen(process.env.PORT, () => {

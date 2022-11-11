@@ -26,8 +26,7 @@ const midAdminSchema = new mongoose.Schema({
     },
     position : {
         type : String,
-        required : true,
-        default: "Student"
+        required : true
     },
     department: {
         type: String,

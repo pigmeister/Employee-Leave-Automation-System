@@ -59,6 +59,9 @@ const leaveSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    recommendedBy:{
+        type:String
+    },
     comments: {
         type: String
     }
