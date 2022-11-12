@@ -18,8 +18,7 @@ router.post('/register', async (req, res) => {
         password: req.body.password,
         gender: req.body.gender,
         designation: req.body.designation,
-        department: req.body.department,
-        position: req.body.position
+        department: req.body.department
     })
 
     try {

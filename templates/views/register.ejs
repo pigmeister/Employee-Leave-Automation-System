@@ -8,27 +8,31 @@
     <form method="POST">
         <div class="form-group mb-2">
             <label for="regis-username">Name</label>
-            <input id="regis-username" type="text" name="username" class="form-control "/>
+            <input id="regis-username" type="text" name="username" class="form-control" required>
         </div>
         <div class="form-group mb-2">
             <label>Email</label>
-            <input type="email" name="email" class="form-control" />
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group mb-2">
+            <label>Mobile No.</label>
+            <input type="tel" name="mobile" class="form-control" required>
         </div>
         <div class="form-group mb-2">
             <label>Password</label>
-            <input type="password" name="password" class="form-control">
+            <input type="password" name="password" class="form-control" required>
         </div>
         <div class="form-group mb-3">
             <label>Designation</label>
-            <input type="text" name="designation" class="form-control" >
+            <input type="text" name="designation" class="form-control" required>
         </div>
         <div class="form-group mb-3">
             <label>Department</label>
-            <select name="department" >
+            <select name="department" required>
                 <option value="IT">IT</option>
                 <option value="CS">CS</option>
-                <option value="MATH">MATHEMATICS</option>
-                <option value="NF">non-faculty</option>
+                <option value="MATH">Mathematics</option>
+                <option value="NF">Non-Faculty</option>
             </select>
         </div>
         <fieldset class="form-group mb-2">
@@ -42,7 +46,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="col-3 form-check">
-                        <input type="radio" name="gender" id="gender-female" value="Female"  class="form-check-input">
+                        <input type="radio" name="gender" id="gender-female" value="Female" class="form-check-input">
                         <label for="gender-female" class="form-check-label">Female</label>
                     </div> 
                 </div>

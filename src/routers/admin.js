@@ -10,16 +10,35 @@ router.get('/admin', auth, (req, res) => {
 })
 
 router.get('/admin/leave', auth, async (req, res) => {
-    let leave;
+    let leave
 
     leave = await Leave.find({status:"recommended"})
-    leave = leave.concat(await Leave.find({status:"pending"}))
+    // leave = leave.concat(await Leave.find({status:"pending"}))
 
-    res.render("leaves.ejs",{leaves:leave})
+    res.render("adminLeaves.ejs", {leaves: leave})
 })
 
-router.post('admin/leave',auth,async(req,res)=>{
+router.post('/admin/leave', auth, async(req, res) => {
 
+    try {    
+        var leave = await Leave.findOne({_id: req.body._id})
+
+        if (req.body.status == 'Approve') {
+            leave.status = 'approved'
+
+            user = req.user
+
+        }
+        else {
+            leave.status = 'rejected'
+            await leave.save() // send down after approved is complete
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+
+    res.redirect('/admin/leave')
 })
 
 module.exports = router

@@ -3,7 +3,7 @@ const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
 const auth = async (req, res, next) => {
-    
+
     if(!req.cookies['auth_token'])
         return res.redirect('/')
 

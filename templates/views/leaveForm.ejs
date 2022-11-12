@@ -11,16 +11,16 @@
     <form method="POST">
         <div class="form-group mb-2">
             <label for="regis-username">Name</label>
-            <input id="regis-username" type="text" name="username" class="form-control " value="<%=user.name%>" disabled/>
+            <input id="regis-username" type="text" name="username" class="form-control " value="<%=user.name%>" disabled>
         </div>
         <div class="form-group mb-2">
             <label>Email
-                <input type="email" name="email" class="form-control" value="<%=user.email%>" disabled/>
+                <input type="email" name="email" class="form-control" value="<%=user.email%>" disabled>
             </label>
         </div>
         <div class="form-group mb-2">
             <label>Mobile Number
-                <input type="number" name="mobile" class="form-control" value="<%=user.mobile%>" disabled>
+                <input type="tel" name="mobile" class="form-control" value="<%=user.mobile%>" disabled>
             </label>
         </div>
         <div class="form-group mb-3">
@@ -35,17 +35,17 @@
         </div>
         <div class="form-group mb-3">
             <label>From
-                <input type="date" name="startTime" class="form-control" >
+                <input type="date" name="startTime" class="form-control" required>
             </label>
         </div>
         <div class="form-group mb-3">
             <label>To
-                <input type="date" name="endTime" class="form-control" >
+                <input type="date" name="endTime" class="form-control" required>
             </label>
         </div>
         <div class="form-group mb-3">
             <label>Leave Type
-               <select name="leaveType">
+               <select name="leaveType" required>
                    <option name="CL">CL</option>
                    <option name="RH">RH</option>
                    <option name="HPL">HPL</option>
@@ -58,17 +58,17 @@
         </div>
         <div class="form-group mb-3">
             <label>Reason
-                <input type="text" name="reason" class="form-control" >
+                <input type="text" name="reason" class="form-control" required>
             </label>
         </div>
         <div class="form-group mb-3">
             <label>Address During Leave
-                <input type="text" name="addressDuringLeave" class="form-control" >
+                <input type="text" name="addressDuringLeave" class="form-control" required>
             </label>
         </div>
         <div class="form-group mb-3">
             <label>Person taking charge of duties
-                <input type="email" name="replacement" class="form-control" >
+                <input type="email" name="replacement" class="form-control" required>
             </label>
         </div>
         <div class="form-group mb-3">
@@ -76,7 +76,7 @@
                 <input type="checkbox" name="LTC" class="form-control">
             </label>
         </div>
-        <input type="submit" value="Apply" class="btn btn-primary-site ">
+        <input type="submit" value="Apply" class="btn btn-primary-site">
         </form>
 </body>
 </html>

@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         validate(x) {
             if(!validator.isEmail(x)) {
-                throw new Error("Email is not valid!")
+                throw new Error("Email is invalid")
             }
         }
     },
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         validate(x) {
             if(!validator.isMobilePhone(x)) {
-                throw new Error("Mobile number is not valid!")
+                throw new Error("Mobile number is invalid")
             }
         }
     },
@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
         trim: true
 
     },
-    isOnLeave : {
+    isOnLeave: {
         type: Boolean,
         required: true
     },
@@ -55,7 +55,6 @@ const UserSchema = new mongoose.Schema({
             }
         }
     },
-
     gender: {
         type: String,
         required: true,
@@ -93,7 +92,6 @@ const UserSchema = new mongoose.Schema({
         }
     },
     parents: [mongoose.Schema.Types.ObjectId],
-    
     tokens: [{
         token: {
             type: String,
