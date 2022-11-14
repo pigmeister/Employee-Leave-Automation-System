@@ -5,10 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Form</title>
+    <script>
+        function checkDates(form){
+            var date = new Date();
+            var todayDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            var todayTimeStamp = todayDate.getTime()
+
+            var startDate = new Date(form.startTime.value)
+            var startTimeStamp = startDate.getTime()
+
+            var endDate = new Date(form.endTime.value)
+            var endTimeStamp = endDate.getTime()
+
+            if (startTimeStamp <= todayTimeStamp) {
+                alert("starting date should be after today")
+                form.startTime.focus();
+                return false
+            }
+
+            if (endTimeStamp < startTimeStamp) {
+                alert("End Date can not be earlier than Start date")
+                form.endTime.focus();
+                return false
+            }
+
+            var days = endTimeStamp-startTimeStamp;
+            days = days/(1000*60*60*24)
+
+            if(form.leaveType.value === 'CL')
+            {
+                if(days > <%= user.leavesLeft.cl %>)
+                {
+                    alert("Only <%= user.leavesLeft.cl %> CL left")
+                    return false
+                }
+            }
+
+            if(form.leaveType.value === 'RH')
+            {
+                if(days > <%= user.leavesLeft.rh %>)
+                {
+                    alert("Only <%= user.leavesLeft.rh %> RH left")
+                    return false
+                }
+            }
+
+            if(form.leaveType.value === 'EL')
+            {
+                if(days > <%= user.leavesLeft.el %>)
+                {
+                    alert("Only <%= user.leavesLeft.el %> EL left")
+                    return false
+                }
+            }
+
+            //vacation leave logic
+            return true
+        }
+    </script>
 </head>
 <body>
 
-    <form method="POST">
+    <form method="POST" onsubmit="return checkDates(this)">
         <div class="form-group mb-2">
             <label for="regis-username">Name</label>
             <input id="regis-username" type="text" name="username" class="form-control " value="<%=user.name%>" disabled>
@@ -50,7 +108,6 @@
                    <option name="RH">RH</option>
                    <option name="HPL">HPL</option>
                    <option name="EL">EL</option>
-                   <option name="SCL">SCL</option>
                    <option name="Commuted">Commuted</option>
                    <option name="Comp-off">Comp-off</option>
                </select>

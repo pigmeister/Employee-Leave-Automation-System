@@ -80,11 +80,6 @@ const UserSchema = new mongoose.Schema({
             required: true,
             default:10
         },
-        scl: {
-            type: Number,
-            required: true,
-            default:10
-        },
         compOff: {
             type : Number,
             required: true,
