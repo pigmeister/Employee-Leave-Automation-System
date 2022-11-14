@@ -22,7 +22,13 @@ router.get('/midadmin/leave', auth, async (req, res) => {
         leave = await Leave.find({status:"pending", department:"NF"}).sort({startTime:'asc'})
     }
 
-    res.render("midadminLeaves.ejs", {leaves: leave})
+    var inCharge = new Array()
+    for (const e of leave) {
+        const replacement = await User.findOne({_id: e.replacement})
+        await inCharge.push(replacement.name)
+    }
+
+    res.render("midadminLeaves.ejs", {leaves: leave, inCharge: inCharge})
 })
 
 router.post('/midadmin/leave', auth, async(req, res) => {

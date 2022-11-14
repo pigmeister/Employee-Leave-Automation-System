@@ -5,24 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaves</title>
+    <style>
+        .form-popup {
+            display: none;
+            top: 100px;
+            left: 100px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
     <% var i = 1 %>
     <% leaves.forEach((e) => { %>
         <tr class="table-row">
             <th scope="row"><%=i%></th>
-            <% i = i + 1 %>
+            <% var current = "myForm" + i.toString() %>
             <td><%= e.name %></td>
             <td><%= e.startTime%></td>
             <td><%= e.endTime%></td>
-            <form method="POST" class="mt-3" id="info-form">
-                <input type="hidden" id="id" name="_id" value="<%= e._id%>">
-                <div class = "form-group">
-                    <input type="submit" name="status" value="Approve" class="btn btn-accent-site">
-                    <input type="submit" name="status" value="Reject" class="btn btn-outline-danger">
-                </div>
-            </form>
-        </tr>
+            <button class="open-button" onclick="openForm(<%=current%>)">Details</button>
+            <div class="form-popup" id=<%=current%>>
+                <%= e.name %><br>
+                <%= e.email %><br>
+                <%= e.mobile %><br>
+                <%= e.designation %><br>
+                <%= e.department %><br>
+                <%= e.startTime %><br>
+                <%= e.endTime %><br>
+                <%= e.leaveType %><br>
+                <%= e.reason %><br>
+                <%= inCharge[i-1] %><br>
+                <%= e.addressDuringLeave %><br>
+                <form method="POST" class="mt-3" id="info-form">
+                    <input type="hidden" id="id" name="_id" value="<%= e._id%>">
+                    <div class = "form-group">
+                        <input type="submit" name="status" value="Approve" class="btn btn-accent-site">
+                        <input type="submit" name="status" value="Reject" class="btn btn-outline-danger">
+                    </div>
+                </form>
+                <button type="button" class="btn cancel" onclick="closeForm(<%=current%>)">Close</button>
+            </div>
+            <% i = i+1 %>
+        </tr><br>
     <% }) %>
+
+    <script src="/js/jquery-3.6.1.js"></script>
+    <script>
+        function openForm(current) {
+            current.style.display = "block";
+        }
+        function closeForm(current) {
+            current.style.display = "none";
+        }
+    </script>
+
 </body>
 </html>

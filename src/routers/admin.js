@@ -13,9 +13,13 @@ router.get('/admin/leave', auth, async (req, res) => {
     let leave
 
     leave = await Leave.find({status:"recommended"})
-    // leave = leave.concat(await Leave.find({status:"pending"}))
+    var inCharge = new Array()
+    for (const e of leave) {
+        const replacement = await User.findOne({_id: e.replacement})
+        await inCharge.push(replacement.name)
+    }
 
-    res.render("adminLeaves.ejs", {leaves: leave})
+    res.render("adminLeaves.ejs", {leaves: leave, inCharge: inCharge})
 })
 
 router.post('/admin/leave', auth, async(req, res) => {
