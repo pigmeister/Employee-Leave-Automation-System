@@ -22,10 +22,14 @@ router.get('/midadmin/leave', auth, async (req, res) => {
         leave = await Leave.find({status:"pending", department:"NF"}).sort({startTime:'asc'})
     }
 
-    var inCharge = new Array()
-    for (const e of leave) {
+    var inCharge = {}
+    for (var e of leave) {
         const replacement = await User.findOne({_id: e.replacement})
-        await inCharge.push(replacement.name)
+        inCharge[e._id] = {
+                            name: replacement.name,
+                            startDate: e.startTime.toUTCString().slice(5, 16),
+                            endDate: e.endTime.toUTCString().slice(5, 16)
+                        }
     }
 
     res.render("midadminLeaves.ejs", {leaves: leave, inCharge: inCharge})
