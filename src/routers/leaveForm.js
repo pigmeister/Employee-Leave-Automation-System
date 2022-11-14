@@ -24,6 +24,10 @@ router.post('/leaveForm',auth, async (req, res)=>{
             LTCValue = true
         }
 
+        var endTimestamp = req.body.endTime.getTime()
+        endTimestamp += (60 * 1000)
+        const endTime = new Date(endTimestamp)
+
         const leave = new Leave({
             userID: req.user._id,
             name: req.user.name,
@@ -32,7 +36,7 @@ router.post('/leaveForm',auth, async (req, res)=>{
             designation: req.user.designation,
             department: req.user.department,
             startTime: req.body.startTime,
-            endTime: req.body.endTime,
+            endTime: endTime,
             leaveType: req.body.leaveType,
             reason: req.body.reason,
             replacement: replacementUser._id,

@@ -79,12 +79,12 @@ const UserSchema = new mongoose.Schema({
             type: Number,
             required: true,
             default:10
-        },
-        compOff: {
-            type : Number,
-            required: true,
-            default:5
         }
+        // compOff: {
+        //     type : Number,
+        //     required: true,
+        //     default:5
+        // }
     },
     parents: [mongoose.Schema.Types.ObjectId],
     tokens: [{

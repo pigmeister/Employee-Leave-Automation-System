@@ -12,11 +12,16 @@ router.get('/admin', auth, (req, res) => {
 router.get('/admin/leave', auth, async (req, res) => {
     let leave
 
-    leave = await Leave.find({status:"recommended"})
-    var inCharge = new Array()
-    for (const e of leave) {
+    leave = await Leave.find({status: "recommended"})
+    
+    var inCharge = {}
+    for (var e of leave) {
         const replacement = await User.findOne({_id: e.replacement})
-        await inCharge.push(replacement.name)
+        inCharge[e._id] = {
+                            name: replacement.name,
+                            startDate: e.startTime.toUTCString().slice(5, 16),
+                            endDate: e.endTime.toUTCString().slice(5, 16)
+                        }
     }
 
     res.render("adminLeaves.ejs", {leaves: leave, inCharge: inCharge})
@@ -27,16 +32,38 @@ router.post('/admin/leave', auth, async(req, res) => {
     try {    
         var leave = await Leave.findOne({_id: req.body._id})
 
+        var startTimeStamp = leave.startTime.getTime()
+        var endTimeStamp = leave.endTime.getTime()
+        var daysCount = parseInt((endTimeStamp - startTimeStamp) / (1000 * 60 * 60 * 24)) + 1
+
         if (req.body.status == 'Approve') {
             leave.status = 'approved'
 
-            user = req.user
+            const user = await User.findOne({_id: leave.userID})
+            
+            if (leave.leaveType === 'CL') {
+                user.leavesLeft.cl -= daysCount
+            }
+            if (leave.leaveType === 'RH') {
+                user.leavesLeft.rh -= daysCount
+            }
+            if (leave.leaveType === 'EL') {
+                user.leavesLeft.el -= daysCount
+            }
+            if (leave.leaveType === 'HPL') {
+                user.leavesLeft.hpl -= daysCount
+            }
+            if (leave.leaveType === 'Vacation') {
+                user.leavesLeft.el -= daysCount / 2.0
+            }
 
+            await user.save()
         }
         else {
             leave.status = 'rejected'
-            await leave.save() // send down after approved is complete
         }
+        
+        await leave.save()
     }
     catch (e) {
         console.log(e)

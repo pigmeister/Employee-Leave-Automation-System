@@ -30,7 +30,7 @@
             }
 
             var days = endTimeStamp-startTimeStamp;
-            days = days/(1000*60*60*24)
+            days = parseInt(days / (1000*60*60*24)) + 1
 
             if(form.leaveType.value === 'CL')
             {
@@ -68,9 +68,9 @@
                 }
             }
 
-            if(form.leaveType.value === 'VL')
+            if(form.leaveType.value === 'Vacation')
             {
-                if(days/2 > <%= user.leavesLeft.el %>)
+                if(days/2.0 > <%= user.leavesLeft.el %>)
                 {
                     alert("Only <%= user.leavesLeft.el %> EL left")
                     return false
@@ -121,13 +121,14 @@
         <div class="form-group mb-3">
             <label>Leave Type
                <select name="leaveType" required>
-                   <option name="CL">CL</option>
-                   <option name="RH">RH</option>
-                   <option name="HPL">HPL</option>
-                   <option name="EL">EL</option>
+                   <option name="CL">Casual Leave</option>
+                   <option name="RH">Restricted Holiday</option>
+                   <option name="HPL">Half Pay Leave</option>
+                   <option name="EL">Earn Leave</option>
                    <option name="Commuted">Commuted</option>
-                   <option name="VL">Vacation Leave</option>
-                   <option name="Comp-off">Comp-off</option>
+                   <option name="Vacation">Vacation Leave</option>
+                   <option name="Maternity">Maternity Leave</option>
+                   <!-- <option name="Comp-off">Comp-off</option>s -->
                </select>
             </label>
         </div>
