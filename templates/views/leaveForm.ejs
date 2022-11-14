@@ -59,6 +59,23 @@
                 }
             }
 
+            if(form.leaveType.value === 'HPL')
+            {
+                if(days > <%= user.leavesLeft.hpl %>)
+                {
+                    alert("Only <%= user.leavesLeft.hpl %> HPL left")
+                    return false
+                }
+            }
+
+            if(form.leaveType.value === 'VL')
+            {
+                if(days/2 > <%= user.leavesLeft.el %>)
+                {
+                    alert("Only <%= user.leavesLeft.el %> EL left")
+                    return false
+                }
+            }
             //vacation leave logic
             return true
         }
@@ -109,6 +126,7 @@
                    <option name="HPL">HPL</option>
                    <option name="EL">EL</option>
                    <option name="Commuted">Commuted</option>
+                   <option name="VL">Vacation Leave</option>
                    <option name="Comp-off">Comp-off</option>
                </select>
             </label>
