@@ -73,7 +73,7 @@
                 }
             }
 
-            if(form.leaveType.value === 'Vacation')
+            if(form.leaveType.value === 'VL')
             {
                 if(days/2.0 > <%= user.leavesLeft.el %>)
                 {
@@ -128,13 +128,13 @@
                         <div class="form-group mb-3">
                             <label>Leave Type
                                 <select name="leaveType" required>
-                                    <option name="CL">Casual Leave</option>
-                                    <option name="RH">Restricted Holiday</option>
-                                    <option name="EL">Earn Leave</option>
-                                    <option name="HPL">Half Pay Leave</option>
+                                    <option name="CL">CL</option>
+                                    <option name="EL">EL</option>
+                                    <option name="HPL">HPL</option>
+                                    <option name="RH">RH</option>
                                     <option name="Commuted">Commuted</option>
-                                    <option name="Vacation">Vacation Leave</option>
-                                    <option name="Maternity">Maternity Leave</option>
+                                    <option name="Vacation">Vacation</option>
+                                    <option name="Maternity">Maternity</option>
                                     <!-- <option name="Comp-off">Comp-off</option>s -->
                                 </select>
                             </label>

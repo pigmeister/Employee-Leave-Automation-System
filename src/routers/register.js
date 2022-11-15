@@ -6,7 +6,7 @@ const adminAuth = require('../middlewares/adminAuth')
 const router = new express.Router()
 
 router.get('/register', adminAuth, (req, res) => {
-    res.render('register', {error: req.query.error, auth: req.query.auth})
+    res.render('register', {error: req.query.error})
 })
 
 router.post('/register', async (req, res) => {

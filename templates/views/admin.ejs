@@ -27,6 +27,30 @@
     <title>Admin Page</title>
 </head>
 <body>
+
+    <header>
+        <div class="container-fluid bg-primary-site-darker">
+            <div class="py-2 row">
+                <div class="col-md">
+                    <ul class="nav d-flex m-0 justify-content-center justify-content-md-start">
+                        <li class="nav-item" >
+                            <a href="/admin" class="nav-link" style="color:#FFFFFF;">Employee Info</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/admin/leave" class="nav-link" style="color:#FFFFFF;">Approve Leaves</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/register" class="nav-link" style="color:#FFFFFF;">Register Employee</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/adminLogout" class="nav-link" style="color:#FFFFFF;">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <table class="content-table">
         <tr>
             <th>Name</th>
@@ -117,7 +141,7 @@
                 // const et = e.endTime.toUTCString()
                 console.log(e)
                 var modal = $(this)
-                modal.find('.modal-title').text("Pending request for "+e.name)
+                modal.find('.modal-title').text("Employee Information")
                 modal.find('.modal-body .container #info-name span').text(e.name)
                 modal.find('.modal-body .container #info-email span').text(e.email)
                 modal.find('.modal-body .container #info-mobile span').text(e.mobile)

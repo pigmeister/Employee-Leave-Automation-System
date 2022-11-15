@@ -3,6 +3,7 @@ const auth = require('../middlewares/midadminAuth')
 const authARDR = require('../middlewares/authARDR')
 const Leave = require('../models/leave')
 const User = require('../models/user')
+const midAdmin = require('../models/midadmin')
 const router = new express.Router()
 // const moment = require('moment')
 
@@ -25,7 +26,7 @@ router.get('/midadmin/leave', authARDR, async (req, res) => {
                         }
     }
 
-    res.render("adminLeaves.ejs", {leaves: leave, inCharge: inCharge})
+    res.render("adminLeaves.ejs", {leaves: leave, inCharge: inCharge, type: 'midadmin', position: req.user.position})
 })
 
 router.post('/midadmin/leave', authARDR, async(req, res) => {
@@ -45,20 +46,20 @@ router.post('/midadmin/leave', authARDR, async(req, res) => {
                 leave.status = 'approved'
 
                 const user = await User.findOne({_id: leave.userID})
-                console.log(user)
-                if (leave.leaveType === 'Casual Leave') {
+
+                if (leave.leaveType === 'CL') {
                     user.leavesLeft.cl -= daysCount
                 }
-                if (leave.leaveType === 'Restricted Holiday') {
+                if (leave.leaveType === 'RH') {
                     user.leavesLeft.rh -= daysCount
                 }
-                if (leave.leaveType === 'Earn Leave') {
+                if (leave.leaveType === 'EL') {
                     user.leavesLeft.el -= daysCount
                 }
-                if (leave.leaveType === 'Half Pay Leave') {
+                if (leave.leaveType === 'HPL') {
                     user.leavesLeft.hpl -= daysCount
                 }
-                if (leave.leaveType === 'Vacation Leave') {
+                if (leave.leaveType === 'Vacation') {
                     user.leavesLeft.el -= daysCount / 2.0
                 }
                 

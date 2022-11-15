@@ -5,7 +5,7 @@ const unauth = require('../middlewares/unauth')
 const router = new express.Router()
 
 router.get('/midadminLogin', unauth, (req, res) => {
-    res.render('login', {type: "midadmin"})
+    res.render('login', {type: "midadmin", error: req.query.error})
 })
 
 router.post('/midadminLogin', async (req, res) => {

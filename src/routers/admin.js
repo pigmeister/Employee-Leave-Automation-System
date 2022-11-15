@@ -27,7 +27,7 @@ router.get('/admin/leave', auth, async (req, res) => {
                         }
     }
 
-    res.render("adminLeaves.ejs", {leaves: leave, inCharge: inCharge})
+    res.render("adminLeaves.ejs", {leaves: leave, inCharge: inCharge, type: 'admin'})
 })
 
 router.post('/admin/leave', auth, async(req, res) => {
@@ -47,20 +47,20 @@ router.post('/admin/leave', auth, async(req, res) => {
                 leave.status = 'approved'
 
                 const user = await User.findOne({_id: leave.userID})
-                console.log(user)
-                if (leave.leaveType === 'Casual Leave') {
+
+                if (leave.leaveType === 'CL') {
                     user.leavesLeft.cl -= daysCount
                 }
-                if (leave.leaveType === 'Restricted Holiday') {
+                if (leave.leaveType === 'RH') {
                     user.leavesLeft.rh -= daysCount
                 }
-                if (leave.leaveType === 'Earn Leave') {
+                if (leave.leaveType === 'EL') {
                     user.leavesLeft.el -= daysCount
                 }
-                if (leave.leaveType === 'Half Pay Leave') {
+                if (leave.leaveType === 'HPL') {
                     user.leavesLeft.hpl -= daysCount
                 }
-                if (leave.leaveType === 'Vacation Leave') {
+                if (leave.leaveType === 'Vacation') {
                     user.leavesLeft.el -= daysCount / 2.0
                 }
                 

@@ -271,7 +271,11 @@
                 modal.find('.modal-body .container #info-reason span').text(e.reason)
                 modal.find('.modal-body .container #info-status span').text(e.status)
                 modal.find('.modal-body .container #info-incharge span').text(inc[e._id].name)
-                modal.find('.modal-body .container #info-accepted-by-incharge span').text(e.takenCharge)
+                if (e.takenCharge == true) {
+                    modal.find('.modal-body .container #info-accepted-by-incharge span').text('Yes')
+                } else {
+                    modal.find('.modal-body .container #info-accepted-by-incharge span').text('No')
+                }
                 if (e.approvedByAdmin == true) {
                     modal.find('.modal-body .container #info-approved-by-admin span').text('Yes')
                 } else {
