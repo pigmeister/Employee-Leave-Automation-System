@@ -5,14 +5,17 @@ const User = require('../models/user')
 const router = new express.Router()
 // const moment = require('moment')
 
-router.get('/admin', auth, (req, res) => {
-    res.render("home", {home: 3})
+router.get('/admin', auth, async (req, res) => {
+    
+    const users = await User.find({})
+
+    res.render("admin", {users: users})
 })
 
 router.get('/admin/leave', auth, async (req, res) => {
     let leave
 
-    leave = await Leave.find({status: "recommended"})
+    leave = await Leave.find({status: "recommended", takenCharge: true})
     
     var inCharge = {}
     for (var e of leave) {
@@ -40,20 +43,20 @@ router.post('/admin/leave', auth, async(req, res) => {
             leave.status = 'approved'
 
             const user = await User.findOne({_id: leave.userID})
-            
-            if (leave.leaveType === 'CL') {
+            console.log(user)
+            if (leave.leaveType === 'Casual Leave') {
                 user.leavesLeft.cl -= daysCount
             }
-            if (leave.leaveType === 'RH') {
+            if (leave.leaveType === 'Restricted Holiday') {
                 user.leavesLeft.rh -= daysCount
             }
-            if (leave.leaveType === 'EL') {
+            if (leave.leaveType === 'Earn Leave') {
                 user.leavesLeft.el -= daysCount
             }
-            if (leave.leaveType === 'HPL') {
+            if (leave.leaveType === 'Half Pay Leave') {
                 user.leavesLeft.hpl -= daysCount
             }
-            if (leave.leaveType === 'Vacation') {
+            if (leave.leaveType === 'Vacation Leave') {
                 user.leavesLeft.el -= daysCount / 2.0
             }
 

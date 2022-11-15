@@ -24,7 +24,7 @@ router.post('/leaveForm',auth, async (req, res)=>{
             LTCValue = true
         }
 
-        var endTimestamp = req.body.endTime.getTime()
+        var endTimestamp = new Date(req.body.endTime).getTime()
         endTimestamp += (60 * 1000)
         const endTime = new Date(endTimestamp)
 

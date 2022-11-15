@@ -59,6 +59,10 @@ const leaveSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    takenCharge: {
+        type: Boolean,
+        default: false
+    },
     recommendedBy:{
         type:String
     },
