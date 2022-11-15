@@ -5,7 +5,7 @@ const unauth = require('../middlewares/unauth')
 const router = new express.Router()
 
 router.get('/midadminLogin', unauth, (req, res) => {
-    res.render('login')
+    res.render('login', {type: "midadmin"})
 })
 
 router.post('/midadminLogin', async (req, res) => {
@@ -14,10 +14,10 @@ router.post('/midadminLogin', async (req, res) => {
 
         const token = await user.generateAuthToken()
         res.cookie('auth_token', token)
-        res.redirect('/')
+        res.redirect('/midadmin/recommend')
     } 
     catch (e) {
-        res.redirect('/login?error=1')
+        res.redirect('/midadminLogin?error=1')
     }
     
 })

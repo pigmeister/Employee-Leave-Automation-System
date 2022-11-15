@@ -15,7 +15,7 @@ router.get('/admin', auth, async (req, res) => {
 router.get('/admin/leave', auth, async (req, res) => {
     let leave
 
-    leave = await Leave.find({status: "recommended", takenCharge: true})
+    leave = await Leave.find({status: "recommended", takenCharge: true, approvedByAdmin: false})
     
     var inCharge = {}
     for (var e of leave) {
@@ -40,27 +40,33 @@ router.post('/admin/leave', auth, async(req, res) => {
         var daysCount = parseInt((endTimeStamp - startTimeStamp) / (1000 * 60 * 60 * 24)) + 1
 
         if (req.body.status == 'Approve') {
-            leave.status = 'approved'
 
-            const user = await User.findOne({_id: leave.userID})
-            console.log(user)
-            if (leave.leaveType === 'Casual Leave') {
-                user.leavesLeft.cl -= daysCount
-            }
-            if (leave.leaveType === 'Restricted Holiday') {
-                user.leavesLeft.rh -= daysCount
-            }
-            if (leave.leaveType === 'Earn Leave') {
-                user.leavesLeft.el -= daysCount
-            }
-            if (leave.leaveType === 'Half Pay Leave') {
-                user.leavesLeft.hpl -= daysCount
-            }
-            if (leave.leaveType === 'Vacation Leave') {
-                user.leavesLeft.el -= daysCount / 2.0
+            leave.approvedByAdmin = true
+
+            if (leave.approvedByMidadmin == true) {
+                leave.status = 'approved'
+
+                const user = await User.findOne({_id: leave.userID})
+                console.log(user)
+                if (leave.leaveType === 'Casual Leave') {
+                    user.leavesLeft.cl -= daysCount
+                }
+                if (leave.leaveType === 'Restricted Holiday') {
+                    user.leavesLeft.rh -= daysCount
+                }
+                if (leave.leaveType === 'Earn Leave') {
+                    user.leavesLeft.el -= daysCount
+                }
+                if (leave.leaveType === 'Half Pay Leave') {
+                    user.leavesLeft.hpl -= daysCount
+                }
+                if (leave.leaveType === 'Vacation Leave') {
+                    user.leavesLeft.el -= daysCount / 2.0
+                }
+                
+                await user.save()
             }
 
-            await user.save()
         }
         else {
             leave.status = 'rejected'

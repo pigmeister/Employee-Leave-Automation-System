@@ -27,6 +27,34 @@
     <title>User Profile</title>
 </head>
 <body>
+
+    <header>
+        <div class="container-fluid bg-primary-site-darker">
+            <div class="py-2 row">
+                <div class="col-md">
+                    <ul class="nav d-flex m-0 justify-content-center justify-content-md-start">
+                        <li class="nav-item" >
+                            <a href="/user" class="nav-link" style="color:#FFFFFF;">Profile</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/user/history" class="nav-link" style="color:#FFFFFF;">History</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/user/inCharge" class="nav-link" style="color:#FFFFFF;">Duty In-Charge</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/leaveForm" class="nav-link" style="color:#FFFFFF;">Apply for Leave</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="/logout" class="nav-link" style="color:#FFFFFF;">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
     <div class="mt-4">
         <div class="container">
             <div class="border rounded py-4 px-4 bg-light">
@@ -154,20 +182,25 @@
                         <h6 class="col-7 m-0 mr-3 p-0 text-left">Start Date:</h6>
                         <span>01/01/2000</span>
                     </div>
-
+                    
                     <div class="label-info-group row align-items-center" id="info-end-time">
                         <h6 class="col-7 m-0 mr-3 p-0 text-left">End Date:</h6>
                         <span>01/01/2000</span>
                     </div>
-
+                    
                     <div class="label-info-group row align-items-center" id="info-leave-type">
                         <h6 class="col-7 m-0 mr-3 p-0 text-left">Leave Type:</h6>
                         <span>CL</span>
                     </div>
-
+                    
                     <div class="label-info-group row align-items-center" id="info-reason">
                         <h6 class="col-7 m-0 mr-3 p-0 text-left">Reason:</h6>
                         <span>Sick</span>
+                    </div>
+
+                    <div class="label-info-group row align-items-center" id="info-address-during-leave">
+                        <h6 class="col-7 m-0 mr-3 p-0 text-left">Address During Leave:</h6>
+                        <span>Lucknow</span>
                     </div>
 
                     <div class="label-info-group row align-items-center" id="info-status">
@@ -190,15 +223,20 @@
                         <span>N/A</span>
                     </div>
 
-                    <div class="label-info-group row align-items-center" id="info-address-during-leave">
-                        <h6 class="col-7 m-0 mr-3 p-0 text-left">Address During Leave:</h6>
-                        <span>Lucknow</span>
+                    <div class="label-info-group row align-items-center" id="info-approved-by-admin">
+                        <h6 class="col-7 m-0 mr-3 p-0 text-left">Approved By Dealing Asst:</h6>
+                        <span>No</span>
+                    </div>
+
+                    <div class="label-info-group row align-items-center" id="info-approved-by-midadmin">
+                        <h6 class="col-7 m-0 mr-3 p-0 text-left">Approved By AR/DR:</h6>
+                        <span>No</span>
                     </div>
 
                     <form method="POST" class="mt-3" id="info-form">
                         <input type="hidden" id="id" name="_id">
                         <div class="form-group">
-                            <input type="submit" name="status" value="Cancel" class="btn btn-accent-site">
+                            <input type="submit" name="status" value="Cancel Request" class="btn btn-accent-site">
                         </div>
                     </form>
                 </div>
@@ -221,7 +259,7 @@
                 // const et = e.endTime.toUTCString()
                 console.log(e)
                 var modal = $(this)
-                modal.find('.modal-title').text("Pending request for "+e.name)
+                modal.find('.modal-title').text("Request Details")
                 modal.find('.modal-body .container #info-name span').text(e.name)
                 modal.find('.modal-body .container #info-email span').text(e.email)
                 modal.find('.modal-body .container #info-mobile span').text(e.mobile)
@@ -234,6 +272,16 @@
                 modal.find('.modal-body .container #info-status span').text(e.status)
                 modal.find('.modal-body .container #info-incharge span').text(inc[e._id].name)
                 modal.find('.modal-body .container #info-accepted-by-incharge span').text(e.takenCharge)
+                if (e.approvedByAdmin == true) {
+                    modal.find('.modal-body .container #info-approved-by-admin span').text('Yes')
+                } else {
+                    modal.find('.modal-body .container #info-approved-by-admin span').text('No')
+                }
+                if (e.approvedByMidadmin == true) {
+                    modal.find('.modal-body .container #info-approved-by-midadmin span').text('Yes')
+                } else {
+                    modal.find('.modal-body .container #info-approved-by-midadmin span').text('No')
+                }
                 if (e.status == 'pending') {
                     modal.find('.modal-body .container #info-recommended-by span').text('N/A')
                 } else {

@@ -63,6 +63,14 @@ const leaveSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    approvedByAdmin: {
+        type: Boolean,
+        default: false
+    },
+    approvedByMidadmin: {
+        type: Boolean,
+        default: false
+    },
     recommendedBy:{
         type:String
     },

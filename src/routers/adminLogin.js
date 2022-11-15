@@ -5,7 +5,7 @@ const unauth = require('../middlewares/unauth')
 const router = new express.Router()
 
 router.get('/adminLogin', unauth, (req, res) => {
-    res.render('login')
+    res.render('login', {type: "admin"})
 })
 
 router.post('/adminLogin', async (req, res) => {
@@ -17,7 +17,7 @@ router.post('/adminLogin', async (req, res) => {
         res.redirect('/')
     } 
     catch (e) {
-        res.redirect('/login?error=1')
+        res.redirect('/adminLogin?error=1')
     }
     
 })

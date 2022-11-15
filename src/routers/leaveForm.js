@@ -52,7 +52,7 @@ router.post('/leaveForm',auth, async (req, res)=>{
         console.log(e)
     }
     
-    res.redirect('/leave') 
+    res.redirect('/user') 
 })
 
 module.exports = router
